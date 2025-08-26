@@ -208,26 +208,39 @@ function analyzeLearn(scores) {
     const instructor = scores["LI"];
     const self = scores["LS"];
     const peer = scores["LP"];
+    const values = [instructor, self, peer];
+    const uniqueValues = new Set(values);
+    const sum = values.reduce((a, b) => a + b, 0);
 
-    if(instructor === 0) {
-        if(instructor === self && instructor === peer) {
-            learnAnalysisDiv.innerHTML += `<p>The student has scored [0] across all [Learning] categories, this is a possible sign of [Burnout] and/or the assessment didn't have options that truly reflected the student's opinions.</p>`;
+    if(instructor === self && self === peer) {  // EQUAL VALUES
+        if(instructor === 0) {
+            learnAnalysisDiv.innerHTML += `<p>Students show signs of burnout or disengagement.</p>`
+        } else {
+            learnAnalysisDiv.innerHTML += `<p>Student is well-rounded and benefits from all types of learning methods.</p>`
         }
-        if(self > peer) {
-            if(peer === 0) {
-                learnAnalysisDiv.innerHTML += `<p>The student scored highest for [Themselves] meaning they greatly benefit from self-guided studying. However, they scored lowest for [Instructor] and [Peers] meaning they may struggle with guided learning and group learning.</p>`;
-            } else if(peer > 0) {
-                learnAnalysisDiv.innerHTML += `<p>The student scored highest for [Themselves] meaning they greatly benefit from self-guided studying.</p>`;
-                learnAnalysisDiv.innerHTML += `<p>The student has a secondary highest score for [Peers] meaning that they may also benefit from peer-guided discussions.</p>`;
-            }
-        } else if(peer > self) {
-            if(self === 0) {
-                learnAnalysisDiv.innerHTML += `<p>The student scored the highest for [Peers] meaning they greatly benefit from peer-guided studying.</p>`;
-            } else if(self > 0) {
-                learnAnalysisDiv.innerHTML += `<p>The student has a secondary highest score for [Themselves] meaning that they may also benefit self-guided learning.</p>`;
-            }
-        }
+    } else if ((instructor === self && peer === 0) || (instructor === peer && self === 0 ) || (self === peer && instructor === 0)) {  // TWO EQUAL, ONE ZERO
+        let tieTypes = getTieTypes(instructor, self, peer);
+        learnAnalysisDiv.innerHTML += `<p>Student shows strong preference for ${tieTypes[0]} and ${tieTypes[1]} learning methods.</p>`
+    } else if(sum > 0 && values.filter(v => v > 0).length === 1) {   // ONLY ONE DOMINANT
+        const dominantIndex = values.findIndex(v => v > 0);
+        const dominantType = ['instructor-led', 'self-guided', 'peer-based'][dominantIndex];
+        learnAnalysisDiv.innerHTML += `<p>Student shows a strong preference for ${dominantType} learning.</p>`
     }
+}
+
+function getTieTypes(instructor, self, peer) {
+    const types = [];
+    if(instructor === self && instructor !== 0) {
+        types.push("instructor-led", "self-guided")
+    }
+    if(instructor === peer && instructor !== 0) {
+        types.push("instructor-led", "peer-based");
+    }
+    if(self === peer && self !== 0) {
+        types.push("self-guided", "peer-based");
+    }
+
+    return types;
 }
 
 document.addEventListener("DOMContentLoaded", renderQuiz);
