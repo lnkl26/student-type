@@ -36,7 +36,7 @@ const questions = [
         question: "You're preparing for your presentation. How would you go about preparing yourself?",
         options: [
             {text: "Record yourself doing the presentation, and then listening to the recording before presenting.", type: "OL"},
-            {text: "Go through your script to read and highlight key sections.", type: "OW"},
+            {text: "Go through your script to read and highlight key sections.", type: "OR"},
             {text: "Create and/or rewrite your flashcards.", type: "OW"},
             {text: "Present to your friends before the real presentation.", type: "OD"}
         ]
@@ -178,6 +178,7 @@ function submitQuiz() {
 
     displayResults(scores);
     analyzeLearn(scores);
+    analyzeObtain(scores);
 }
 
 
@@ -203,7 +204,7 @@ function displayResults(scores) {
 
 function analyzeLearn(scores) {
     const learnAnalysisDiv = document.getElementById("learn-analysis");
-    learnAnalysisDiv.innerHTML = "information here";
+    learnAnalysisDiv.innerHTML = "information here";    // TEMP
 
     const instructor = scores["LI"];
     const self = scores["LS"];
@@ -214,19 +215,54 @@ function analyzeLearn(scores) {
 
     if(instructor === self && self === peer) {  // EQUAL VALUES
         if(instructor === 0) {
-            learnAnalysisDiv.innerHTML += `<p>Students show signs of burnout or disengagement.</p>`
+            learnAnalysisDiv.innerHTML += `<p>Students shows signs of burnout or disengagement.</p>`;
         } else {
-            learnAnalysisDiv.innerHTML += `<p>Student is well-rounded and benefits from all types of learning methods.</p>`
+            learnAnalysisDiv.innerHTML += `<p>Student is well-rounded and benefits from all types of learning methods.</p>`;
         }
     } else if ((instructor === self && peer === 0) || (instructor === peer && self === 0 ) || (self === peer && instructor === 0)) {  // TWO EQUAL, ONE ZERO
         let tieTypes = getTieTypes(instructor, self, peer);
-        learnAnalysisDiv.innerHTML += `<p>Student shows strong preference for ${tieTypes[0]} and ${tieTypes[1]} learning methods.</p>`
+        learnAnalysisDiv.innerHTML += `<p>Student shows strong preference for ${tieTypes[0]} and ${tieTypes[1]} learning methods.</p>`;
     } else if(sum > 0 && values.filter(v => v > 0).length === 1) {   // ONLY ONE DOMINANT
         const dominantIndex = values.findIndex(v => v > 0);
         const dominantType = ['instructor-led', 'self-guided', 'peer-based'][dominantIndex];
-        learnAnalysisDiv.innerHTML += `<p>Student shows a strong preference for ${dominantType} learning.</p>`
+        learnAnalysisDiv.innerHTML += `<p>Student shows a strong preference for ${dominantType} learning.</p>`;
     }
 }
+
+function analyzeObtain(scores) {
+    const obtainAnalysisDiv = document.getElementById("obtain-analysis");
+    obtainAnalysisDiv.innerHTML = "information here";   // TEMP
+
+    const listen = scores["OL"];
+    const read = scores["OR"];
+    const write = scores["OW"];
+    const doing = scores["OD"];
+    const values = [listen, read, write, doing];
+    const sum = values.reduce((a, b) => a + b, 0);
+
+    if(listen === read && read === write && write === doing) {
+        if(listen === 0) {
+            obtainAnalysisDiv.innerHTML += `<p>Student shows signs of burnout or disengagement.</p>`;
+        } else {
+            obtainAnalysisDiv.innerHTML += `<p>Student is well-rounded and benefits from all types of obtaining methods.</p>`;
+        }
+        return;
+    }
+
+    if(sum > 0) {
+        const max = Math.max(...values);
+        const types = ['listening', 'reading', 'writing', 'doing'];
+        const dominantTypes = types.filter((type, index) => values[index] === max);
+
+        if(dominantTypes.length === 1) {
+            obtainAnalysisDiv.innerHTML += `<p>Student shows a strong preference for ${dominantTypes[0]} as their method of obtaining information.</p>`;
+        } else if(dominantTypes.length >= 2) {
+            const formatted = dominantTypes.join(" and ");
+            obtainAnalysisDiv.innerHTML += `<p>Student shows strong preference for ${formatted} as obtaining methods.</p>`;
+        }
+    }
+}
+
 
 function getTieTypes(instructor, self, peer) {
     const types = [];

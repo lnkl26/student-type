@@ -23,5 +23,10 @@ This is still in the early stages. Currently all the questions are available and
 `analyzeResults(scores)`
 * Compare scores in comparison to each other, and determine dominant styles
 * Provide some analysis on what the scores could possibly mean
+
+`analyzeSecondary(scores)`
+* Determine second best methods that students would benefit from
 ## To-Do
 * Improve UX/UI
+## Bug Fixes
+* {FIXED 2025-27-08} Incorrect point distribution for Obtaining section
