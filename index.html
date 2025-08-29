@@ -1,33 +1,68 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="styles.css">
-    <title>Student Learning Type Test</title>
-  </head>
-  <body>
-    <h1>Student Learning Type Test</h1>
-    <p>These are multi-select options. Choose statements that are true to you, if none are true, leave blank and skip the question.</p>
-    <div id="quiz">
-    </div>
-    <button id="submit" onclick="submitQuiz()">submit</button>
-    <div id="results"></div>
-    <div id="analysis">
-      <h2>Analysis</h2>
-      <h3>Learning Styles</h3>
-      <p>This asssessment focuses on 3 different "Learning" styles. Where a student can learn from an [Instructor], [Themselves], and/or from a [Peer].</p>
-      <div id="learn-analysis"></div>
-      <h3>Obtaining Styles</h3>
-      <p>This assessment focuses on 4 different "Obtaining" styles. Where a student can obtain information by [Listening], [Reading], [Writing], and/or [Doing].</p>
-      <div id="obtain-analysis"></div>
-      <h3>Retention Styles</h3>
-      <p>This assessment focuses on 3 different "Retention" styles. Where a student can retain information long-term by [Retrospection], [Retention], and/or [Teaching].</p>
-      <div id="retent-analysis"></div>
-      <h3>Mindset Analysis</h3>
-      <p>Furthermore, this assessment attempts to determine the overall [Mindset] the student has towards learning new information.</p>
-      <div id="mind-analysis"></div>
-    </div>
-  </body>
-  <script src="script.js"></script>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+  <title>Student Learning Type Test</title>
+</head>
+<body>
+  <h1>Student Personality Quiz</h1>
+
+  <div class="button-group">
+    <a href="test.html"><button>Take the Quiz!</button></a>
+  </div>
+
+  <section id="info">
+    <h2>About the Quiz</h2>
+    <p>This Student Personality Quiz analyzes a student's learner profile by scoring them based on four main categories:</p>
+    <ul>
+      <li><strong>Learning</strong>: How they best learn information</li>
+      <li><strong>Translating</strong>: How they best translate information</li>
+      <li><strong>Retention</strong>: How they best retain information</li>
+      <li><strong>Mindset</strong>: Their attitude toward learning challenges</li>
+    </ul>
+
+    <p>Each category has subcategories that help determine a student's primary and secondary learning traits.</p>
+
+    <h3>Learning</h3>
+    <p>The best way for the student to learn information the first time:</p>
+    <ul>
+      <li>Learning via Instructor</li>
+      <li>Learning via Peers</li>
+      <li>Learning via Self</li>
+    </ul>
+
+    <h3>Translating</h3>
+    <p>The best way for the student to translate the information for themselves:</p>
+    <ul>
+      <li>Translating via Listening</li>
+      <li>Translating via Reading</li>
+      <li>Translating via Writing</li>
+      <li>Translating via Doing</li>
+    </ul>
+
+    <h3>Retention</h3>
+    <p>The best way for the student to keep the information long-term:</p>
+    <ul>
+      <li>Retention via Retrospective</li>
+      <li>Retention via Repetition</li>
+      <li>Retention via Teaching</li>
+    </ul>
+
+    <h3>Mindset</h3>
+    <p>How the student responds to frustration, boredom, or pressure:</p>
+    <ul>
+      <li><strong>Passive</strong>: Continues what they’ve been doing without change</li>
+      <li><strong>Active</strong>: Attempts to change their approach</li>
+      <li><strong>Positive</strong>: Eager to learn, even after a bad score</li>
+      <li><strong>Negative</strong>: Learns primarily to improve their score</li>
+    </ul>
+
+    <h3>Purpose of the Quiz</h3>
+    <p>
+      The results can help students (and possibly instructors) enhance learning and studying habits. It may also help identify early signs of burnout—especially in high-achieving or gifted students.
+    </p>
+  </section>
+</body>
 </html>

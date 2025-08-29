@@ -1,3 +1,29 @@
 #analysis {
     display: none;
 }
+
+body {
+    background-color: #B5BD9D;
+    margin: 0;
+}
+
+.home-container {
+    background: beige;
+    height: 100%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.home-header {
+    margin-top: 25px;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width:  100%;
+    background-color: white;
+    text-align: center;
+}

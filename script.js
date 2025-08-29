@@ -191,7 +191,7 @@ function displayResults(scores) {
 
     const categories = {
         "Learning Style": ["LS", "LP", "LI"],
-        "Obtaining Style": ["OL", "OR", "OW", "OD"],
+        "Translating Style": ["OL", "OR", "OW", "OD"],
         "Retention Style": ["RET", "REP", "TEA"],
         "Mindset": ["PAS", "ACT", "POS", "NEG"]
     };
@@ -246,7 +246,7 @@ function analyzeObtain(scores) {
         if(listen === 0) {
             obtainAnalysisDiv.innerHTML += `<p>Student shows signs of burnout or disengagement.</p>`;
         } else {
-            obtainAnalysisDiv.innerHTML += `<p>Student is well-rounded and benefits from all types of obtaining methods.</p>`;
+            obtainAnalysisDiv.innerHTML += `<p>Student is well-rounded and benefits from all types of Translating methods.</p>`;
         }
         return;
     }
@@ -257,10 +257,10 @@ function analyzeObtain(scores) {
         const dominantTypes = types.filter((type, index) => values[index] === max);
 
         if(dominantTypes.length === 1) {
-            obtainAnalysisDiv.innerHTML += `<p>Student shows a strong preference for ${dominantTypes[0]} as their method of obtaining information.</p>`;
+            obtainAnalysisDiv.innerHTML += `<p>Student shows a strong preference for ${dominantTypes[0]} as their method of Translating information.</p>`;
         } else if(dominantTypes.length >= 2) {
             const formatted = dominantTypes.join(" and ");
-            obtainAnalysisDiv.innerHTML += `<p>Student shows strong preference for ${formatted} as obtaining methods.</p>`;
+            obtainAnalysisDiv.innerHTML += `<p>Student shows strong preference for ${formatted} as Translating methods.</p>`;
         }
     }
 }
