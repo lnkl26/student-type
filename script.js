@@ -179,6 +179,8 @@ function submitQuiz() {
     displayResults(scores);
     analyzeLearn(scores);
     analyzeObtain(scores);
+    analyzeRetent(scores);
+    //analyzeMind(scores);
 }
 
 
@@ -263,6 +265,38 @@ function analyzeObtain(scores) {
     }
 }
 
+function analyzeRetent(scores) {
+    const retentAnalysisDiv = document.getElementById("retent-analysis");
+    retentAnalysisDiv.innerHTML = "information here";   // TEMP
+
+    const retrospect = scores["RET"];
+    const repetition = scores["REP"];
+    const teaching = scores["TEA"];
+    const values = [retrospect, repetition, teaching];
+    const sum = values.reduce((a, b) => a + b, 0);
+
+    if(retrospect === repetition && repetition === teaching) {  // SAME VALUE
+        if(retrospect === 0) {  // ALL EQUAL TO 0
+            retentAnalysisDiv.innerHTML += `<p>Student shows signs of burnout or disengagement.</p>`;
+        } else {
+            retentAnalysisDiv.innerHTML += `<p>Student is well-rounded and benefits from all types of Retention methods.</p>`;
+        }
+        return;
+    }
+
+    if(sum > 0) {
+        const max = Math.max(...values);
+        const types = ['retrospect', 'repetition', 'teaching'];
+        const dominantTypes = types.filter((type, index) => values[index] === max);
+
+        if(dominantTypes.length === 1) {
+            retentAnalysisDiv.innerHTML += `<p>Student shows a strong preference for ${dominantTypes[0]} as their method of retaining information.</p>`;
+        } else if(dominantTypes.length >= 2) {
+            const formatted = dominantTypes.join(" and ");
+            retentAnalysisDiv.innerHTML += `<p>Student shows strong preference for ${formatted} as retaining methods.</p>`;
+        }
+    }
+}
 
 function getTieTypes(instructor, self, peer) {
     const types = [];

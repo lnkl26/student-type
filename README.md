@@ -30,3 +30,4 @@ This is still in the early stages. Currently all the questions are available and
 * Improve UX/UI
 ## Bug Fixes
 * {FIXED 2025-27-08} Incorrect point distribution for Obtaining section
+* {FIXED 2025-29-08} Some sections were not displaying the analysis when submitting the quiz
