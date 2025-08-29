@@ -180,7 +180,7 @@ function submitQuiz() {
     analyzeLearn(scores);
     analyzeObtain(scores);
     analyzeRetent(scores);
-    //analyzeMind(scores);
+    analyzeMind(scores);
 }
 
 
@@ -295,6 +295,38 @@ function analyzeRetent(scores) {
             const formatted = dominantTypes.join(" and ");
             retentAnalysisDiv.innerHTML += `<p>Student shows strong preference for ${formatted} as retaining methods.</p>`;
         }
+    }
+}
+
+function analyzeMind(scores) {
+    const mindAnalysisDiv = document.getElementById("mind-analysis");
+    mindAnalysisDiv.innerHTML = "information here"; // TEMP
+
+    const passive = scores["PAS"];
+    const active = scores["ACT"];
+    const positive = scores["POS"];
+    const negative = scores["NEG"];
+    const values = [passive, active, positive, negative];
+    const sum = values.reduce((a, b) => a + b, 0);
+
+    if(passive === active && positive === negative && passive === positive) {
+        if(passive === 0) {
+            mindAnalysisDiv.innerHTML += `<p>Student shows signs of burnout or disengagement.</p>`;
+        } else {
+            mindAnalysisDiv.innerHTML += `<p>Student has a varying and balancing mindset dependent on the situation.</p>`;
+        }
+    } 
+    
+    if(passive > active) {
+        mindAnalysisDiv.innerHTML += `<p>Student is passive on their approach when it comes to learning.</p>`;
+    } else if(passive < active) {
+        mindAnalysisDiv.innerHTML += `<p>Student is active on their approach when it comes to learning.</p>`;
+    }
+
+    if(positive > negative) {
+        mindAnalysisDiv.innerHTML += `<p>Student has a positive mindset. They are eager and enjoy learning even if they make mistakes.</p>`;
+    } else if(positive < negative) {
+        mindAnalysisDiv.innerHTML += `<p>Student has a negative mindset. They may enjoy learning but they do not tolerate mistakes and see it as a failure on their part.</p>`;
     }
 }
 
